@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS `mydb`;
+
 CREATE TABLE IF NOT EXISTS `mydb`.`Clan_organizacije` (
   `jmbg` INT(13) NOT NULL,
   `ime` VARCHAR(20) NOT NULL,
@@ -5,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Clan_organizacije` (
   `email` VARCHAR(20) NOT NULL,
   `br_tel` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`jmbg`))
-ENGINE = InnoDB
+ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Ucesnik_na_projektu` (
   `jmbg` INT(13) NOT NULL,
@@ -14,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Ucesnik_na_projektu` (
   `email` VARCHAR(20) NOT NULL,
   `br_tel` VARCHAR(13) NOT NULL,
   PRIMARY KEY (`jmbg`))
-ENGINE = InnoDB
+ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Gost` (
   `Ucesnik_na_projektu_jmbg` INT(13) NOT NULL,
@@ -26,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Gost` (
     REFERENCES `mydb`.`Ucesnik_na_projektu` (`jmbg`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
+ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Volonter` (
   `Ucesnik_na_projektu_jmbg` INT(13) NOT NULL,
@@ -37,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Volonter` (
     REFERENCES `mydb`.`Ucesnik_na_projektu` (`jmbg`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
+ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Ucesnik` (
   `Ucesnik_na_projektu_jmbg` INT(13) NOT NULL,
@@ -52,7 +54,14 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Ucesnik` (
     REFERENCES `mydb`.`Ucesnik_na_projektu` (`jmbg`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`Lokacija` (
+  `ptt` INT NOT NULL,
+  `adresa` VARCHAR(45) NOT NULL,
+  `naziv` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`ptt`))
+ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Projekat` (
   `id_projekta` INT NOT NULL,
@@ -77,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Projekat` (
     REFERENCES `mydb`.`Clan_organizacije` (`jmbg`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
+ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Trosak` (
   `rbr` INT NOT NULL,
@@ -97,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Trosak` (
     REFERENCES `mydb`.`Clan_organizacije` (`jmbg`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
+ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Volontiranje` (
   `Projekat_id_projekta` INT NOT NULL,
@@ -115,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Volontiranje` (
     REFERENCES `mydb`.`Volonter` (`Ucesnik_na_projektu_jmbg`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
+ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Ucestvovanje` (
   `Ucesnik_Ucesnik_na_projektu_jmbg` INT(13) NOT NULL,
@@ -134,14 +143,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Ucestvovanje` (
     REFERENCES `mydb`.`Ucesnik` (`Ucesnik_na_projektu_jmbg`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-
-CREATE TABLE IF NOT EXISTS `mydb`.`Lokacija` (
-  `ptt` INT NOT NULL,
-  `adresa` VARCHAR(45) NOT NULL,
-  `naziv` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`ptt`))
-ENGINE = InnoDB
+ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Radionica` (
   `sifra` INT NOT NULL,
@@ -150,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Radionica` (
   `vreme_zavrsetka` VARCHAR(5) NOT NULL,
   `datum_odrzavanja` DATE NOT NULL,
   PRIMARY KEY (`sifra`))
-ENGINE = InnoDB
+ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Podrzava` (
   `Projekat_id_projekta` INT NOT NULL,
@@ -175,4 +177,4 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Podrzava` (
     REFERENCES `mydb`.`Gost` (`Ucesnik_na_projektu_jmbg`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
+ENGINE = InnoDB;
