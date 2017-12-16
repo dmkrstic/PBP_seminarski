@@ -1,3 +1,5 @@
+DROP DATABASE `mydb`;
+
 CREATE DATABASE `mydb`;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Clan_organizacije` (
