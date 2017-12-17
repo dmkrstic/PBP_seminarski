@@ -1,6 +1,6 @@
-DROP DATABASE `mydb`;
+DROP DATABASE IF EXISTS `mydb`;
 
-CREATE DATABASE `mydb`;
+CREATE DATABASE IF NOT EXISTS `mydb`;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Clan_organizacije` (
   `jmbg` VARCHAR(13) NOT NULL,

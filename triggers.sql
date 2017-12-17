@@ -1,99 +1,72 @@
-USE mydb;   
+USE `mydb`;   
 
-/* • Ažuriranje budžeta u slučaju dodatog troška projekta
-    • Ažuriranje ukupnog broja prisutnih na projektu */
+/* • Ažuriranje ukupnog broja prisutnih na projektu */
 
 delimiter #
     
-create trigger bi_trosak
-before insert on Trosak
-for each row
-begin
-    if (
-        select budzet
-        from Projekat 
-        where Projekat_id_projekta = id_projekta
-    ) > iznos
-    then update Projekat set budzet = budzet - iznos;
-    else
-        signal sqlstate '45000' set message_text='Nedozvoljen unos';
-    end if;
-end
+CREATE TRIGGER `bi_trosak`
+BEFORE INSERT ON `Trosak`
+FOR EACH ROW
+BEGIN
+    IF (
+        SELECT `budzet`
+        FROM `Projekat`
+        WHERE `id_projekta` = new.`Projekat_id_projekta`
+    ) > new.`iznos`
+    THEN
+        UPDATE `Projekat` SET `budzet` = `budzet` - new.`iznos` WHERE `id_projekta`=new.`Projekat_id_projekta`;
+    ELSE
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Prekoracen budzet, nedozvoljen trosak';
+    END IF;
+END
 #
 
-create trigger ai_ucestvovanje
-after insert on Ucestvovanje
-for each row
-begin
-    update Projekat set br_ucesnika = br_ucesnika + 1 where Projekat_id_projekta = id_projekta;
-end
+CREATE TRIGGER `ai_ucestvovanje`
+BEFORE INSERT ON `Ucestvovanje`
+FOR EACH ROW
+BEGIN
+    UPDATE `Projekat` SET `br_ucesnika` = `br_ucesnika` + 1 WHERE `id_projekta`=new.`Projekat_id_projekta`;
+END
 #
 
-create trigger ai_podrzava
-after insert on Podrzava
-for each row
-begin
-    update Projekat set br_ucesnika = br_ucesnika + 1 where Projekat_id_projekta = id_projekta;
-end
+CREATE TRIGGER `ai_volontiranje`
+BEFORE INSERT ON `Volontiranje`
+FOR EACH ROW
+BEGIN
+    UPDATE `Projekat` SET `br_ucesnika` = `br_ucesnika` + 1 WHERE `id_projekta`=new.`Projekat_id_projekta`;
+END
 #
 
-create trigger ai_volontiranje
-after insert on Volontiranje
-for each row
-begin
-    update Projekat set br_ucesnika = br_ucesnika + 1 where Projekat_id_projekta = id_projekta;
-end
+CREATE TRIGGER `ai_podrzava`
+BEFORE INSERT ON `Podrzava`
+FOR EACH ROW
+BEGIN
+    UPDATE `Projekat` SET `br_ucesnika` = `br_ucesnika` + 1 WHERE `id_projekta`=new.`Projekat_id_projekta`;
+END
 #
 
-create trigger bd_ucestvovanje
-before delete on Ucestvovanje
-for each row
-begin
-    if (
-        select br_ucesnika
-        from Projekat
-        where Projekat_id_projekta = id_projekta
-    ) > 0
-    then
-        update Projekat set br_ucesnika = br_ucesnika - 1 where Projekat_id_projekta = id_projekta;
-    else
-        signal sqlstate '45000' set message_text='Nedozvoljen unos';
-    end if;
-end
+CREATE TRIGGER `ad_ucestvovanje`
+AFTER DELETE ON `Ucestvovanje`
+FOR EACH ROW
+BEGIN
+    UPDATE `Projekat` SET `br_ucesnika` = `br_ucesnika` - 1 WHERE `id_projekta`=old.`Projekat_id_projekta`;
+END
 #
 
-create trigger bd_volontiranje
-before delete on Volontiranje
-for each row
-begin
-    if (
-        select br_ucesnika
-        from Projekat
-        where Projekat_id_projekta = id_projekta
-    ) > 0
-    then
-        update Projekat set br_ucesnika = br_ucesnika - 1 where Projekat_id_projekta = id_projekta;
-    else
-        signal sqlstate '45000' set message_text='Nedozvoljen unos';
-    end if;
-end
+CREATE TRIGGER `ad_volontiranje`
+AFTER DELETE ON `Volontiranje`
+FOR EACH ROW
+BEGIN
+    UPDATE `Projekat` SET `br_ucesnika` = `br_ucesnika` - 1 WHERE `id_projekta`=old.`Projekat_id_projekta`;
+END
 #
 
-create trigger bd_podrzava
-before delete on Podrzava
-for each row
-begin
-    if (
-        select br_ucesnika
-        from Projekat
-        where Projekat_id_projekta = id_projekta
-    ) > 0
-    then
-        update Projekat set br_ucesnika = br_ucesnika - 1 where Projekat_id_projekta = id_projekta;
-    else
-        signal sqlstate '45000' set message_text='Nedozvoljen unos';
-    end if;
-end
+CREATE TRIGGER `ad_podrzava`
+AFTER DELETE ON `Podrzava`
+FOR EACH ROW
+BEGIN
+    UPDATE `Projekat` SET `br_ucesnika` = `br_ucesnika` - 1 WHERE `id_projekta`=old.`Projekat_id_projekta`;
+END
 #
 
 delimiter ;
