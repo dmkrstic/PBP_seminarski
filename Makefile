@@ -21,4 +21,4 @@ trigger:
 	mysql -u root -p -D mydb <triggers.sql
 	
 clean:
-	-rm -f *.mwb.bak
+	-rm -f *.mwb.bak *.out

@@ -16,7 +16,7 @@ INSERT INTO `Lokacija` VALUES(11000,'Nedodjija BB','Kidalica');
 INSERT INTO `Lokacija` VALUES(11001,'Ulica BB','Ludilo');
 
 INSERT INTO `Projekat` VALUES(1,'MatHack','Takmicenje','2017-05-13','2017-05-14',150000.0,0,11000,'1000000000000');
-INSERT INTO `Projekat` VALUES(2,'JobPrep','Priprema za posao','2017-02-13','2017-02-14',150000.0,0,11000,'1000000000005');
+INSERT INTO `Projekat` VALUES(2,'JobPrep','Priprema za posao','2017-02-13','2017-02-14',150000.0,0,11001,'1000000000005');
 
 INSERT INTO `Radionica` VALUES(100,'C101','12:00','13:00','2017-05-13');
 
