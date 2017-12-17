@@ -31,4 +31,7 @@ DELETE FROM `Ucestvovanje` WHERE `Ucesnik_Ucesnik_na_projektu_jmbg`='10000000000
 
 INSERT INTO Trosak VALUES(1,'Sitni troskovi',1024.32,1,'1000000000000');
 INSERT INTO Trosak VALUES(1,'Stampa',3024.32,1,'1000000000000');
+/*
+Test za trigger(ne prolazi):
 INSERT INTO Trosak VALUES(1,'Neispravan unos',150000.0,1,'1000000000000');
+*/
