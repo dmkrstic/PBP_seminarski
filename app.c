@@ -213,15 +213,15 @@ int main(int argc, char** argv) {
             else if (!strcmp(ans,"prezime")) {
                 fprintf(stdout,"Unesite prezime:\n");
                 fscanf(stdin,"%s",surname);
-                sprintf(query, "UPDATE Ucesnik_na_projektu SET ime='%s' WHERE jmbg='%s'",surname,mb);
+                sprintf(query, "UPDATE Ucesnik_na_projektu SET prezime='%s' WHERE jmbg='%s'",surname,mb);
             } else if (!strcmp(ans,"email")) {
                 fprintf(stdout,"Unesite email:\n");
                 fscanf(stdin,"%s",mail);
-                sprintf(query, "UPDATE Ucesnik_na_projektu SET ime='%s' WHERE jmbg='%s'",mail,mb);
+                sprintf(query, "UPDATE Ucesnik_na_projektu SET mail='%s' WHERE jmbg='%s'",mail,mb);
             } else if (!strcmp(ans,"tel")) {
                 fprintf(stdout,"Unesite telefon:\n");
                 fscanf(stdin,"%s",tel);
-                sprintf(query, "UPDATE Ucesnik_na_projektu SET ime='%s' WHERE jmbg='%s'",tel,mb);
+                sprintf(query, "UPDATE Ucesnik_na_projektu SET br_tel='%s' WHERE jmbg='%s'",tel,mb);
             }
 
             if (mysql_query (connection, query) != 0) {
