@@ -30,8 +30,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Ucesnik` (
   CONSTRAINT `fk_Ucesnik_Ucesnik_na_projektu1`
     FOREIGN KEY (`Ucesnik_na_projektu_jmbg`)
     REFERENCES `mydb`.`Ucesnik_na_projektu` (`jmbg`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Gost` (
@@ -42,8 +42,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Gost` (
   CONSTRAINT `fk_Gost_Ucesnik_na_projektu1`
     FOREIGN KEY (`Ucesnik_na_projektu_jmbg`)
     REFERENCES `mydb`.`Ucesnik_na_projektu` (`jmbg`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Volonter` (
@@ -53,8 +53,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Volonter` (
   CONSTRAINT `fk_Volonter_Ucesnik_na_projektu1`
     FOREIGN KEY (`Ucesnik_na_projektu_jmbg`)
     REFERENCES `mydb`.`Ucesnik_na_projektu` (`jmbg`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Radionica` (
@@ -89,13 +89,13 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Projekat` (
   CONSTRAINT `fk_Projekat_Lokacija1`
     FOREIGN KEY (`Lokacija_ptt`)
     REFERENCES `mydb`.`Lokacija` (`ptt`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Projekat_Clan_organizacije1`
     FOREIGN KEY (`Clan_organizacije_jmbg`)
     REFERENCES `mydb`.`Clan_organizacije` (`jmbg`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Trosak` (
@@ -109,13 +109,13 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Trosak` (
   CONSTRAINT `fk_Trosak_Projekat1`
     FOREIGN KEY (`Projekat_id_projekta`)
     REFERENCES `mydb`.`Projekat` (`id_projekta`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Trosak_Clan_organizacije1`
     FOREIGN KEY (`Clan_organizacije_jmbg`)
     REFERENCES `mydb`.`Clan_organizacije` (`jmbg`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Podrzava` (
@@ -129,18 +129,18 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Podrzava` (
   CONSTRAINT `fk_Projekat_has_Gost_Projekat1`
     FOREIGN KEY (`Projekat_id_projekta`)
     REFERENCES `mydb`.`Projekat` (`id_projekta`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Podrzava_Radionica1`
     FOREIGN KEY (`Radionica_sifra`)
     REFERENCES `mydb`.`Radionica` (`sifra`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Podrzava_Gost1`
     FOREIGN KEY (`Gost_Ucesnik_na_projektu_jmbg`)
     REFERENCES `mydb`.`Gost` (`Ucesnik_na_projektu_jmbg`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Volontiranje` (
@@ -152,13 +152,13 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Volontiranje` (
   CONSTRAINT `fk_Projekat_has_Volonter_Projekat1`
     FOREIGN KEY (`Projekat_id_projekta`)
     REFERENCES `mydb`.`Projekat` (`id_projekta`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Volontiranje_Volonter1`
     FOREIGN KEY (`Volonter_Ucesnik_na_projektu_jmbg`)
     REFERENCES `mydb`.`Volonter` (`Ucesnik_na_projektu_jmbg`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Ucestvovanje` (
@@ -172,16 +172,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Ucestvovanje` (
   CONSTRAINT `fk_Ucesnik_has_Projekat_Projekat1`
     FOREIGN KEY (`Projekat_id_projekta`)
     REFERENCES `mydb`.`Projekat` (`id_projekta`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Ucestvovanje_Ucesnik1`
     FOREIGN KEY (`Ucesnik_Ucesnik_na_projektu_jmbg`)
     REFERENCES `mydb`.`Ucesnik` (`Ucesnik_na_projektu_jmbg`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Ucestvovanje_Volonter1`
     FOREIGN KEY (`Volonter_Ucesnik_na_projektu_jmbg`)
     REFERENCES `mydb`.`Volonter` (`Ucesnik_na_projektu_jmbg`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;

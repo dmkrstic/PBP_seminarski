@@ -33,7 +33,6 @@ int main(int argc, char** argv) {
     char faks[21];
     char uni[21];
     char query[QUERY_SIZE];
-    char buffer[BUFFER_SIZE];
     char ans[10];
     char mb[14];
     char name[21];
@@ -83,7 +82,7 @@ int main(int argc, char** argv) {
             mysql_free_result (result);
               
         } else if (option == 2) {
-            sprintf(query, "SELECT naziv AS `Naziv`, opis AS `Opis`, Lokacija_ptt AS `Lokacija`, datum_pocetka `Pocetak`, datum_zavrsetka AS `Kraj`, trim(c.`ime`) || ' ' || trim(c.`prezime`) AS `Organizator` FROM Projekat p join Clan_organizacije c ON c.`jmbg`=p.`Clan_organizacije_jmbg`");
+            sprintf(query, "SELECT naziv AS `Naziv`, opis AS `Opis`, Lokacija_ptt AS `Lokacija`, datum_pocetka `Pocetak`, datum_zavrsetka AS `Kraj`, concat(c.`ime`,' ',c.`prezime`) AS `Organizator` FROM Projekat p join Clan_organizacije c ON c.`jmbg`=p.`Clan_organizacije_jmbg`");
               if (mysql_query (connection, query) != 0) {
                   error_fatal ("Greska u upitu %s\n", mysql_error (connection));
               }
@@ -217,7 +216,7 @@ int main(int argc, char** argv) {
             } else if (!strcmp(ans,"email")) {
                 fprintf(stdout,"Unesite email:\n");
                 fscanf(stdin,"%s",mail);
-                sprintf(query, "UPDATE Ucesnik_na_projektu SET mail='%s' WHERE jmbg='%s'",mail,mb);
+                sprintf(query, "UPDATE Ucesnik_na_projektu SET email='%s' WHERE jmbg='%s'",mail,mb);
             } else if (!strcmp(ans,"tel")) {
                 fprintf(stdout,"Unesite telefon:\n");
                 fscanf(stdin,"%s",tel);
